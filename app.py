@@ -1,10 +1,12 @@
 import spacy
 from logic.situation_processor import SituationProcessor
-from database.rules_db import RulesDB  # Importar la clase RulesDB
+from database.rules_db import RulesDB 
 from logic.clasification import Classifier
 from flask import Flask, request, jsonify
-import processor as proc
+from flask_cors import CORS, cross_origin
+
 app = Flask(__name__)
+cors = CORS(app)
 
 PATH ='./dataset/dataset.csv'
 
@@ -14,11 +16,13 @@ RULES_LIST = rules_db.get_all_rules()
 NLP = spacy.load("es_core_news_sm")
 
 @app.route("/rules", methods=["GET"])
+@cross_origin()
 def get_all_rules():
     rules_json = rules_db.get_all_rules()
     return jsonify({"rules": rules_json})
 
 @app.route('/evaluate', methods=['POST'])
+@cross_origin()
 def evaluate():
     data = request.json
     print(data)
