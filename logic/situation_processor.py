@@ -5,6 +5,7 @@ from spacy.matcher import PhraseMatcher
 class SituationProcessor:
     def __init__(self, _nlp):
         self.nlp = _nlp
+        self.debug_flag = False
 
     def load_situation(self,situation):
         self.situation = str(situation.lower())
@@ -12,23 +13,29 @@ class SituationProcessor:
     def load_rules(self,rules):
         self.rules = rules
 
+    def load_predict(self,predict):
+        self.predict = predict
+    
+    def debug_on(self,predict):
+        self.debug_flag = True
+
     def get_rules(self):
-        print(f"Analizando: {self.situation}")
+        self.debug(f"Analizando: {self.situation}")
         situation_doc = self.nlp(self.situation)
         situation_doc_c = self.nlp(self.situation)
         matcher = self.match_filter_prepare(situation_doc_c)
         rules_result = []
         
         for rule in self.rules:
-            print(f"REGLA => {rule['name']}")
-            # print(f"CONTENIDO => {rule['contenido']}")
+            self.debug(f"REGLA => {rule['nombre']}")
+            # self.debug(f"CONTENIDO => {rule['contenido']}")
             rule_content_doc = self.nlp(rule["contenido"])
-            print(f"Analizando: SIMILAR")
+            self.debug(f"Analizando: SIMILAR")
             isSimilar = self.similarity_filter(rule_content_doc,situation_doc_c)
-            print(f"Analizando: FILTER")
+            self.debug(f"Analizando: FILTER")
             isMatch = self.match_filter(matcher, rule_content_doc)
             if (isSimilar or isMatch):
-                print(f"AGREGA -----------------------------------")
+                self.debug(f"AGREGA -----------------------------------")
                 rules_result.append(rule)
             
         return rules_result
@@ -36,10 +43,10 @@ class SituationProcessor:
     def similarity_filter(self, rule_doc, situation_doc):
         similarity = situation_doc.similarity(rule_doc)
         if similarity > 0.6:
-            print(f'Similar {similarity}')
+            self.debug(f'Similar {similarity}')
             return True
         else:
-            print(f'No similar {similarity}')
+            self.debug(f'No similar {similarity}')
         return False
     
     def get_keywords(self, situation_doc, quantity=10):    
@@ -58,9 +65,9 @@ class SituationProcessor:
     def match_filter(self, matcher, rule_doc):
         matches = matcher(rule_doc)
         ids = list(set([item[0] for item in matches]))
-        print(f"matches {len(ids)} / {len(matcher)} => {matches}")
+        self.debug(f"matches {len(ids)} / {len(matcher)} => {matches}")
         if (len(ids) and ( len(ids)/ len(matcher) > 0.7)):
-            print("MATCHED")
+            self.debug("MATCH")
             return True
         return False
     
@@ -71,3 +78,7 @@ class SituationProcessor:
         cleaned_text = cleaned_text.replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u')
         cleaned_text = re.sub(r'[^a-zA-Z0-9áéíóúüÁÉÍÓÚÜ.,: ]', '', cleaned_text)
         return cleaned_text
+    
+    def debug(self,message):
+        if (self.debug_flag):
+            print(message)
