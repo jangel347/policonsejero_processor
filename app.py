@@ -27,7 +27,7 @@ def evaluate():
     #tag prediction
     classifier = Classifier(PATH)
     predict = classifier.generate_predict([data["situation"]])
-    print(f'PREDICT {predict}')
+    # print(f'PREDICT {predict}')
 
     # situation process
     processor = SituationProcessor(NLP)

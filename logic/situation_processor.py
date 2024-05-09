@@ -22,16 +22,16 @@ class SituationProcessor:
     def get_rules(self):
         self.debug(f"Analizando: {self.situation}")
         situation_doc = self.nlp(self.situation)
-        situation_doc_c = self.nlp(self.situation)
-        matcher = self.match_filter_prepare(situation_doc_c)
+        matcher = self.match_filter_prepare(situation_doc)
         rules_result = []
         
         for rule in self.rules:
+            isSimilar,isMatch = False
             self.debug(f"REGLA => {rule['nombre']}")
             # self.debug(f"CONTENIDO => {rule['contenido']}")
             rule_content_doc = self.nlp(rule["contenido"])
             self.debug(f"Analizando: SIMILAR")
-            isSimilar = self.similarity_filter(rule_content_doc,situation_doc_c)
+            isSimilar = self.similarity_filter(rule_content_doc,situation_doc)
             self.debug(f"Analizando: FILTER")
             isMatch = self.match_filter(matcher, rule_content_doc)
             if (isSimilar or isMatch):
