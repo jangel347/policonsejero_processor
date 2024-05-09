@@ -29,7 +29,15 @@ def add_evaluation():
 import spacy
 from logic.situation_processor import SituationProcessor
 from database.rules_db import RulesDB  # Importar la clase RulesDB
+from logic.clasification import Classifier
 
+path ='./dataset/dataset.csv'
+classifier = Classifier(path)
+frases = [
+'Un estudiante hizo trampa en una evaluación',
+]
+predict = classifier.generate_predict(frases)
+print(f'PREDICT {predict}')
 # ... (resto del código de la API)
 
 # Inicialización de la clase RulesDB
@@ -49,5 +57,5 @@ for rule in rules:
     print(rule)
 print(f"Reglas encontradas: {len(rules)}")
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
