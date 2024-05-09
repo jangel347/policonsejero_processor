@@ -28,6 +28,8 @@ class SituationProcessor:
         matcher = self.match_filter_prepare(situation_doc)
         self.generate_response()
         rules_result = []
+        tags_rules_result = []
+        similarity_sum = 0
         for rule in self.rules:
             similarity_info = (False,0)
             match_info = (False,None)
@@ -36,6 +38,7 @@ class SituationProcessor:
             rule_content_doc = self.nlp(rule["contenido"])
             self.debug(f"Analizando: SIMILAR")
             similarity_info = self.similarity_filter(rule_content_doc,situation_doc)
+            similarity_sum += similarity_info[1] if similarity_info[1] >= 0 else 0
             self.debug(f"Analizando: FILTER")
             match_info = self.match_filter(matcher, rule_content_doc)
             if (similarity_info[0] or match_info[0]):
@@ -43,7 +46,12 @@ class SituationProcessor:
                 rule["similarity"] = similarity_info[1]
                 rule["match"] = match_info[1]
                 rules_result.append(rule)
-            
+            if self.predict in rule['etiquetas']:
+                tags_rules_result.append(rule)
+        similarity_average = similarity_sum/len(self.rules)
+        self.debug(f"Promedio Similaridad: {similarity_average}")
+        # if (similarity_average > 0.4):
+        rules_result.extend(tags_rules_result)
         return rules_result
     
     def similarity_filter(self, rule_doc, situation_doc):
