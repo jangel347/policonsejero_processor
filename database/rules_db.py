@@ -1,13 +1,9 @@
-from pymongo import MongoClient
-
 class RulesDB:
-    def __init__(self):
-        # Conexión a la base de datos MongoDB
-        self.client = MongoClient("mongodb://localhost:27017/")
-        self.db = self.client["poli_consejero"]
-        self.collection = self.db["rules"]
+    def __init__(self, conn):
+        self.conn = conn
+        self.collection = self.conn.db["rules"]
 
-    def get_all_rules(self):
+    def get_all(self):
         # Consulta a la colección "rules"
         rules = self.collection.find({})
 

@@ -1,26 +1,26 @@
 [
     {
-        "name": "Faltas",
-        "response":"Al parecer en la situación que describes se está cometiendo una falta. Puedes apoyarte en las siguientes reglas descritas en el reglamento:"
+        "nombre": "Faltas",
+        "respuesta":"Al parecer en la situación que describes se está cometiendo una falta. Puedes apoyarte en las siguientes reglas descritas en el reglamento:"
     },
     {
-        "name": "Información",
-        "response":"Parece que quieres saber acerca del reglamento, puedes encontrar la respuesta a tu duda en las siguientes reglas:"
+        "nombre": "Información",
+        "respuesta":"Parece que quieres saber acerca del reglamento, puedes encontrar la respuesta a tu duda en las siguientes reglas:"
     },
     {
-        "name": "Procesos",
-        "response":"Lo que indicas está relacionado con los procesos que se manejan en la universidad. Las siguientes reglas hablan acerca de ello:"
+        "nombre": "Procesos",
+        "respuesta":"Lo que indicas está relacionado con los procesos que se manejan en la universidad. Las siguientes reglas hablan acerca de ello:"
     },
     {
-        "name": "Marco legal",
-        "response":"Puedes guiarte con estas normas del reglamento:"
+        "nombre": "Marco legal",
+        "respuesta":"Puedes guiarte con estas normas del reglamento:"
     },
     {
-        "name": "Ingreso",
-        "response":"Parece que lo que describes esta relacionado con el ingreso a la institución, puedes revisar las siguientes reglas relacionadas:"
+        "nombre": "Ingreso",
+        "respuesta":"Parece que lo que describes esta relacionado con el ingreso a la institución, puedes revisar las siguientes reglas relacionadas:"
     },
     {
-        "name": "Solicitudes",
-        "response":"Al parecer la situación que describes está relacionada con temas de solicitudes y peticiones, puedes apoyarte con las siguientes reglas:"
+        "nombre": "Solicitudes",
+        "respuesta":"Al parecer la situación que describes está relacionada con temas de solicitudes y peticiones, puedes apoyarte con las siguientes reglas:"
     }
 ]

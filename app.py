@@ -1,6 +1,8 @@
 import spacy
 from logic.situation_processor import SituationProcessor
+from database.connection import MongoConnection 
 from database.rules_db import RulesDB 
+from database.tags_db import TagsDB 
 from logic.clasification import Classifier
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
@@ -10,8 +12,11 @@ cors = CORS(app)
 
 PATH ='./dataset/dataset.csv'
 
-rules_db = RulesDB()
-RULES_LIST = rules_db.get_all_rules()
+conn = MongoConnection()
+rules_db = RulesDB(conn)
+tags_db = TagsDB(conn)
+RULES_LIST = rules_db.get_all()
+TAGS_LIST = tags_db.get_all()
 
 NLP = spacy.load("es_core_news_sm")
 
@@ -34,14 +39,16 @@ def evaluate():
     # print(f'PREDICT {predict}')
 
     # situation process
-    processor = SituationProcessor(NLP)
-    processor.load_situation('Créditos académicos')
-    processor.load_rules(RULES_LIST)
+    processor = SituationProcessor(NLP,RULES_LIST,TAGS_LIST)
+    processor.load_situation(data["situation"])
+    processor.load_predict(predict)
+    processor.debug_on()
     rules = processor.get_rules()
+    response = processor.get_response()
 
 
     return jsonify({
-        'response': 'Respuesta de prueba',
+        'response': response,
         'rules': rules,
         'tags':[predict]
         }), 201
