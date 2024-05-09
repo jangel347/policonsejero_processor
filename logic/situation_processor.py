@@ -26,7 +26,8 @@ class SituationProcessor:
         rules_result = []
         
         for rule in self.rules:
-            isSimilar,isMatch = False
+            isSimilar = False
+            isMatch = False
             self.debug(f"REGLA => {rule['nombre']}")
             # self.debug(f"CONTENIDO => {rule['contenido']}")
             rule_content_doc = self.nlp(rule["contenido"])
