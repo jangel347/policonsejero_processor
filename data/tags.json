@@ -22,5 +22,9 @@
     {
         "nombre": "Solicitudes",
         "respuesta":"Al parecer la situación que describes está relacionada con temas de solicitudes y peticiones, puedes apoyarte con las siguientes reglas:"
+    },
+    {
+        "nombre": "Programas",
+        "respuesta":"La situación que describes está relacionada con temas acerca de los programas académicos, puedes apoyarte con las siguientes reglas:"
     }
 ]
