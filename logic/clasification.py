@@ -1,6 +1,6 @@
 import pandas as pd
 import string
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
@@ -20,11 +20,6 @@ class Classifier:
         print(spam_or_ham["label"].value_counts())
 
         spam_or_ham.head()["text"].apply(self.tokenize)
-
-        demo_vectorizer = CountVectorizer(
-            tokenizer = self.tokenize,
-            binary = True
-        )
 
         train_text, test_text, train_labels, test_labels = train_test_split(spam_or_ham["text"], spam_or_ham["label"], stratify=spam_or_ham["label"])
         print(f"Training examples: {len(train_text)}, testing examples {len(test_text)}")
@@ -46,10 +41,12 @@ class Classifier:
 
         self.classifier = classifier
         self.vectorizer = real_vectorizer
+        print('REPORTE DE CLASIFICACIÓN PREDICCIONES: \n', classification_report(test_labels,predicciones))
 
     def generate_predict(self, frases):
         frases_X = self.vectorizer.transform(frases)
         predicciones = self.classifier.predict(frases_X)
+        # print('REPORTE DE CLASIFICACIÓN: \n', classification_report(frases_X['label'],predicciones))
         for text,label in zip(frases, predicciones):
             return label
 
