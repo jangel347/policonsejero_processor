@@ -4,12 +4,12 @@ class TagsDB:
         self.collection = self.conn.db["tags"]
 
     def get_all(self):
-        # Consulta a la colección "rules"
-        rules = self.collection.find({})
+        # Consulta a la colección "tags"
+        tags = self.collection.find({})
         # Conversión de los resultados a JSON
-        rules_json = []
-        for rule in rules:
-            rule["_id"] = str(rule["_id"])
-            rules_json.append(rule)
+        tags_json = []
+        for tag in tags:
+            tag["_id"] = str(tag["_id"])
+            tags_json.append(tag)
 
-        return rules_json
+        return tags_json

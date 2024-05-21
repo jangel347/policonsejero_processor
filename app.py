@@ -2,6 +2,7 @@ import spacy
 from logic.situation_processor import SituationProcessor
 from database.connection import MongoConnection 
 from database.rules_db import RulesDB 
+from database.regulations_db import RegulationsDB 
 from database.tags_db import TagsDB 
 from logic.clasification import Classifier
 from flask import Flask, request, jsonify
@@ -15,6 +16,7 @@ PATH ='./dataset/dataset.csv'
 conn = MongoConnection()
 rules_db = RulesDB(conn)
 tags_db = TagsDB(conn)
+regulations_db = RegulationsDB(conn)
 RULES_LIST = rules_db.get_all()
 TAGS_LIST = tags_db.get_all()
 
@@ -23,8 +25,20 @@ NLP = spacy.load("es_core_news_sm")
 @app.route("/rules", methods=["GET"])
 @cross_origin()
 def get_all_rules():
-    rules_json = rules_db.get_all_rules()
+    rules_json = rules_db.get_all()
     return jsonify({"rules": rules_json})
+
+@app.route("/tags", methods=["POST"])
+@cross_origin()
+def get_all_tags():
+    tags_json = tags_db.get_all()
+    return jsonify({"tags": tags_json})
+
+@app.route("/regulations", methods=["POST"])
+@cross_origin()
+def get_all_regulations():
+    regulations_json = regulations_db.get_all()
+    return jsonify({"regulations": regulations_json})
 
 @app.route('/evaluate', methods=['POST'])
 @cross_origin()
