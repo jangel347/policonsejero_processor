@@ -1,0 +1,31 @@
+Dime 10 situaciones que pueden ocurrir en una universidad relacionadas con <VARIABLE>.
+El valor del tipo es constante: Tipo = <VARIABLE>
+No las enumeres, solo escríbelas con un salto de linea
+Responde en el formato Tipo;Situación
+
+Dime 10 situaciones diferentes a las anteriores que pueden ocurrir en una universidad relacionadas con <VARIABLE>.
+El valor del tipo es constante: Tipo = <VARIABLE>
+No las enumeres, solo escríbelas con un salto de linea
+Responde en el formato Tipo;Situación
+
+VARIABLES:
+Acoso estudiantil
+Discriminación (basada en género, raza, religión, orientación sexual, etc.)
+Problemas de salud mental entre los estudiantes
+Plagio y fraude académico
+Abuso de sustancias entre los estudiantes
+Problemas financieros y acceso equitativo a la educación
+Desigualdad de género en oportunidades académicas y laborales
+Conflictos entre estudiantes y profesores
+Acceso y accesibilidad para estudiantes con discapacidades
+Seguridad en el campus (robos, agresiones, etc.) 
+Falta de recursos para la investigación y el aprendizaje
+Desafíos de alojamiento y vida estudiantil
+Problemas de gestión administrativa y burocracia
+Insatisfacción estudiantil con la calidad de la enseñanza o el currículo
+Falta de diversidad en el cuerpo docente y el personal administrativo
+Desafíos de integración para estudiantes internacionales
+Problemas de infraestructura y mantenimiento en el campus
+Brechas generacionales entre profesores y estudiantes
+Falta de programas de apoyo para estudiantes en situación de riesgo
+Problemas de comunicación y transparencia dentro de la institución.

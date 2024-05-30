@@ -68,7 +68,7 @@ class SituationProcessor:
         self.debug(f"KEYWORDS => {keywords}")
         count_keywords = Counter(keywords)
         common_keywords = count_keywords.most_common(quantity)
-        return [palabra for palabra, _ in common_keywords]
+        return [word for word, _ in common_keywords]
     
     def match_filter_prepare(self, situation_doc):
         matcher = PhraseMatcher(self.nlp.vocab)
