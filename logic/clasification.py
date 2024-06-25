@@ -13,15 +13,15 @@ class Classifier:
         self.train()
 
     def train(self):
-        spam_or_ham = pd.read_csv(self.path, encoding='utf-8',sep=";")[["v1", "v2"]]
-        spam_or_ham.columns = ["label", "text"]
-        spam_or_ham.head()
+        dataset_csv = pd.read_csv(self.path, encoding='utf-8',sep=";")[["v1", "v2"]]
+        dataset_csv.columns = ["label", "text"]
+        dataset_csv.head()
 
-        print(spam_or_ham["label"].value_counts())
+        print(dataset_csv["label"].value_counts())
 
-        spam_or_ham.head()["text"].apply(self.tokenize)
+        dataset_csv.head()["text"].apply(self.tokenize)
 
-        train_text, test_text, train_labels, test_labels = train_test_split(spam_or_ham["text"], spam_or_ham["label"], stratify=spam_or_ham["label"])
+        train_text, test_text, train_labels, test_labels = train_test_split(dataset_csv["text"], dataset_csv["label"], stratify=dataset_csv["label"])
         print(f"Training examples: {len(train_text)}, testing examples {len(test_text)}")
 
         real_vectorizer = CountVectorizer(tokenizer = self.tokenize, binary=True)
@@ -46,7 +46,6 @@ class Classifier:
     def generate_predict(self, frases):
         frases_X = self.vectorizer.transform(frases)
         predicciones = self.classifier.predict(frases_X)
-        # print('REPORTE DE CLASIFICACIÓN: \n', classification_report(frases_X['label'],predicciones))
         for text,label in zip(frases, predicciones):
             return label
 
