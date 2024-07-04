@@ -27,20 +27,20 @@ TAGS_LIST = tags_db.get_all()
 
 NLP = spacy.load("es_core_news_sm")
 
-@app.route("api/rules", methods=["GET"])
+@app.route("/api/rules", methods=["GET"])
 @cross_origin()
 def get_all_rules():
     rules_json = rules_db.get_all()
     return jsonify({"rules": rules_json})
 
-@app.route("api/rules_by", methods=["POST"])
+@app.route("/api/rules_by", methods=["POST"])
 @cross_origin()
 def get_rules_by():
     data = request.json
     rules_json = rules_db.get_rules_by(data)
     return jsonify({"rules": rules_json})
 
-@app.route("api/stadistics/create", methods=["POST"])
+@app.route("/api/stadistics/create", methods=["POST"])
 @cross_origin()
 def create_stadistic():
     data = request.json
@@ -49,19 +49,19 @@ def create_stadistic():
     return jsonify({"message": "CREADA"})
 
 
-@app.route("api/tags", methods=["POST"])
+@app.route("/api/tags", methods=["POST"])
 @cross_origin()
 def get_all_tags():
     tags_json = tags_db.get_all()
     return jsonify({"tags": tags_json})
 
-@app.route("api/regulations", methods=["POST"])
+@app.route("/api/regulations", methods=["POST"])
 @cross_origin()
 def get_all_regulations():
     regulations_json = regulations_db.get_all()
     return jsonify({"regulations": regulations_json})
 
-@app.route('api/evaluate', methods=['POST'])
+@app.route('/api/evaluate', methods=['POST'])
 @cross_origin()
 def evaluate():
     data = request.json
